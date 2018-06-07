@@ -81,7 +81,7 @@ def sentiment_score_list(dataset):
                         c+= 1
                     else:
                         poscount *= 1
-                if judgeodd(c) == 'odd': # 扫描情感词前的否定词数
+                if is_odd(c) == 'odd': # 扫描情感词前的否定词数
                     poscount *= -1.0
                     poscount2 += poscount
                     poscount = 0
@@ -111,7 +111,7 @@ def sentiment_score_list(dataset):
                         d += 1
                     else:
                         negcount *= 1
-                if judgeodd(d) == 'odd':
+                if is_odd(d) == 'odd':
                     negcount *= -1.0
                     negcount2 += negcount
                     negcount = 0
