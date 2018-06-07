@@ -47,7 +47,7 @@ def is_odd(num):
         return 'odd'
         
 def sentiment_score_list(dataset):
-    seg_sentence=cut(cutlist,dataset)
+    seg_sentence=cut_sentence(dataset)
     count1 = []
     count2 = []
     for sen in seg_sentence: # 循环遍历每一个评论
