@@ -5,7 +5,7 @@ import jieba
 
 
 pwd = os.path.dirname(os.path.abspath(__file__))
-jieba02.load_userdict( os.path.join(pwd, 'dict','jieba_sentiment.txt'))
+jieba.load_userdict( os.path.join(pwd, 'dict','jieba_sentiment.txt'))
 
 
 
