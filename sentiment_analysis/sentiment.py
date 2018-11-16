@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jun  17 12:33:42 2018
+@author: cm
+"""
+
+
 import os
 import re
 import jieba
