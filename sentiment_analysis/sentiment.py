@@ -1,7 +1,8 @@
 import os
 import re
-import numpy as np
 import jieba
+import numpy as np
+
 
 
 pwd = os.path.dirname(os.path.abspath(__file__))
@@ -18,9 +19,8 @@ def cut_sentence(text):
 # 打开词典文件，返回列表
 def load_dict(Dict):
     f = os.path.join(pwd, 'dict', Dict)
-    fp = open(f, 'r', encoding='utf-8')
-    lines = fp.readlines()
-    fp.close()
+    with open(f, 'r', encoding='utf-8') ad fp:
+        lines = fp.readlines()
     dictionary = [word.strip() for word in lines]
     return set(dictionary)
    
