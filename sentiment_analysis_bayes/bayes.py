@@ -11,6 +11,31 @@ import numpy as np
 
 pwd = os.path.dirname(os.path.abspath(__file__))
 
+#训练
+def train(trainMatrix,trainCategory):
+    numTrainDocs = len(trainMatrix)
+    numWords = len(trainMatrix[0])
+    pAbusive = sum(trainCategory)/float(numTrainDocs)
+    p0Num,p1Num = np.ones(numWords),np.ones(numWords)
+    p0Deom,p1Deom = 2,2
+    for i in range(numTrainDocs):
+        if trainCategory[i]==1:
+            p1Num = p1Num + trainMatrix[i]
+            p1Deom = p1Deom + sum(trainMatrix[i])
+        else:
+            p0Num = p0Num + trainMatrix[i]
+            p0Deom = p0Deom + sum(trainMatrix[i])  #向量相加
+    p1Vect = p1Num/p1Deom      # 对每个元素做除法
+    p0Vect = p0Num/p0Deom  
+    p1VectLog = np.zeros(len(p1Vect))
+    for i in range(len(p1Vect)):
+        p1VectLog[i] = np.log(p1Vect[i])
+    p0VectLog = np.zeros(len(p0Vect))        
+    for i in range(len(p0Vect)):
+        p0VectLog[i] = np.log(p0Vect[i])        
+    return p0VectLog,p1VectLog,pAbusive    
+
+
 # 朴素贝叶斯分类函数
 def classify(vec2Classify,p0Vec,p1Vec,pClass1):
     p1=sum(vec2Classify*p1Vec) + np.log(pClass1)
