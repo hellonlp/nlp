@@ -107,8 +107,17 @@ def predictionBayes(Sentence):
     return p
 
 
+
 if __name__ =='__main__':
-    print(predictionBayes('我爱武汉'))
+    #--- 训练 ---#
+    #读取变量
+    labels = np.loadtxt(os.path.join(pwd,'data','types.txt'))
+    #读取词袋
+    vectors = read_vec('vector_pearson_40000.txt')
+    #训练参数
+    p0Vec,p1Vec,pClass1 = train(vectors,labels)
+    #--- 测试 ---#
+    #print(predictionBayes('我爱武汉'))
     
     
     
