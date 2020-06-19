@@ -13,6 +13,9 @@ pwd = os.path.dirname(os.path.abspath(__file__))
 
 #训练
 def train(trainMatrix,trainCategory):
+    """
+    情感分为两类：正面和负面，1为正面，0为负面。
+    """
     numTrainDocs = len(trainMatrix)
     numWords = len(trainMatrix[0])
     pAbusive = sum(trainCategory)/float(numTrainDocs)
@@ -56,7 +59,7 @@ def load_p0Vec_p1Vec_pClass1():
     f = os.path.join(pwd,'parametre_pearson_40000','p1Vec.txt')
     with open(f,encoding='utf-8') as fp:
         lines = fp.readlines()
-    p1Vec=[float(l) for l in lines]]
+    p1Vec=[float(l) for l in lines]
     p1Vec = np.array(p1Vec)
     #
     f = os.path.join(pwd,'parametre_pearson_40000','pClass1.txt')
@@ -98,26 +101,32 @@ def set_vector(sentence):
         vector.append(int(line.count(word)))
     return vector
 
+    
+def read_vector(name):
+    f = os.path.join(pwd,'data', name )
+    with open(f) as fp:
+        lines=fp.readlines()
+    lines_new=[list(map(int,line.split())) for line in lines]
+    return(np.array(lines_new))
+
+
 
 #利用模型预测
 p0Vec,p1Vec,pClass1 = load_p0Vec_p1Vec_pClass1()
 def predictionBayes(Sentence):
-    vector  = set_vector(Sentence)#
+    vector  = set_vector(Sentence)
     p = classify(vector,p0Vec,p1Vec,pClass1)
-    return p
+    if p == 1:
+        return '正面'
+    elif p == 0:
+        return '负面'
+
 
 
 
 if __name__ =='__main__':
-    #--- 训练 ---#
-    #读取变量
-    labels = np.loadtxt(os.path.join(pwd,'data','types.txt'))
-    #读取词袋
-    vectors = read_vec('vector_pearson_40000.txt')
-    #训练参数
-    p0Vec,p1Vec,pClass1 = train(vectors,labels)
     #--- 测试 ---#
-    #print(predictionBayes('我爱武汉'))
+    print(predictionBayes('我爱武汉'))
     
     
     
