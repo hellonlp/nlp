@@ -6,9 +6,8 @@ Created on Mon Jun 22 10:42:41 2020
 """
 
 import os
-#import sys
 pwd = os.path.dirname(os.path.abspath(__file__))
-#sys.path.append(pwd)
+
 
 class Hyperparamters:
     # parameters
