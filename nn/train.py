@@ -12,11 +12,7 @@ from nn.load_data import load_train_data,load_test_data
 from nn.utils import cut_list, time_now_string, save_model, shuffle_two
 from nn.utils import plot_loss, plot_accuracy
 
-
 NN = NeuralNetwork()
-
-
-
 
 
 def train(x, y, x_test, y_test, batch_size=hp.batch_size):
