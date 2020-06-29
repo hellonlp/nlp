@@ -148,7 +148,6 @@ def back_propagation_cross_entropy(W1, b1, W2, b2, loss, x, output2, output1, lr
     # Get the gradient in different layers
     delta2 = -loss
     delta1 = np.dot(delta2,W2.T) * sigmoid_derivative(output1)
-    
     # Update the weight(w2) and the biais(b2):  ΔW2 = eta*delta2*output1
     W2 = W2 - hp.lr * np.dot(output1.T , delta2)
     b2 = b2 - hp.lr * delta2
@@ -166,33 +165,14 @@ def back_propagation_cross_entropy_batch(W1, b1, W2, b2, loss, x, output2, outpu
     """
     # Get the gradient in different layers
     delta2 = -loss
-    #delta1 = np.multiply(delta2, sigmoid_derivative(output1))
-    #delta1 = np.multiply(delta2*W2.T, sigmoid_derivative(output1))
-    #delta1 = np.multiply(np.multiply(delta2,W2.T), sigmoid_derivative(output1))
     delta1 = np.dot(delta2,W2.T) * sigmoid_derivative(output1)
     # Update the weight(w2) and the biais(b2):  ΔW2 = eta*delta2*output1
     W2 = W2 - hp.lr * np.dot(output1.T , delta2) / batch_size
     b2 = b2 - hp.lr * np.average(delta2, 0)
     # Update the weight(w2) and the biais(b2):  ΔW1 = eta*delta1*x
     W1 = W1 - hp.lr * np.dot(x.T , delta1) / batch_size
-    b1 = b1 - hp.lr * np.average(delta1, 0)
-#    print('output1',output1.shape)
-#    print('output2',output2.shape)
-#    print('delta2',delta2.shape)
-#    print('delta1',delta1.shape)
-#    print('W1',W1.shape)
-#    print('b1',b1.shape)  
-#    print('W2',W2.shape)
-#    print('b2',b2.shape)      
+    b1 = b1 - hp.lr * np.average(delta1, 0)      
     return W1, b1, W2, b2
-#output1 (160, 5000)
-#output2 (160, 1)
-#delta2 (160, 1)
-#delta1 (160, 5000)
-#W1 (5000, 5000)
-#b1 (1, 5000)
-#W2 (5000, 1)
-#b2 (1, 1)
 
 
 def back_propagation_cross_entropy_batch_2(W1, b1, W2, b2, loss, x, output2, output1, lr, batch_size):
