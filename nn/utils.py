@@ -45,9 +45,7 @@ def shuffle_two(a1, a2):
     """
     ran = np.arange(len(a1))
     np.random.shuffle(ran)
-    a1_ = [a1[l] for l in ran]
-    a2_ = [a2[l] for l in ran]
-    return a1_, a2_
+    return [a1[l] for l in ran], [a2[l] for l in ran]
 
 
 def save_model(w1, b1, w2, b2, file_save_model):
@@ -61,10 +59,8 @@ def load_model(file_load_model):
 
 
 def plot_loss(x,y,x2,y2):
-    plot.plot(x,y,linewidth=1,color='b', label='Train loss')#,marker='*'
+    plot.plot(x,y,linewidth=1,color='b', label='Train loss')
     plot.plot(x2,y2,linewidth=1,color='r', label='Test loss')
-    #plot.plot(x,y,'ob', linewidth=1,label='Train loss',marker='.')#,marker='*'
-    #plot.plot(x2,y2,'or',linewidth=1, label='Test loss',marker='.') 
     plot.title("Loss Graph",fontsize=15)
     plot.xlabel("Step",fontsize=10)
     plot.ylabel("Loss",fontsize=10)
