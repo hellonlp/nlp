@@ -13,10 +13,10 @@ from nn.modules import back_propagation_quadratic_batch,back_propagation_quadrat
 
 class NeuralNetwork(object):
     def __init__(self):
-        # layer 1
+        # Hidden Layer
         self.weight1_initial = np.random.randn(hp.W1_size[0], hp.W1_size[1])
         self.bias1_initial = np.zeros([1, hp.bais1_size])
-        # layer 2
+        # Output Layer
         self.weight2_initial = np.random.randn(hp.W2_size[0], hp.W2_size[1])
         self.bias2_initial = np.zeros([1, hp.bais2_size])
 
