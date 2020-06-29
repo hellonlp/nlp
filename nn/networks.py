@@ -8,8 +8,8 @@ Created on Sat Jun 27 01:06:44 2020
 import numpy as np
 from nn.hyperparameters import Hyperparamters as hp
 from nn.modules import full_connection_sigmoid, error_sample,full_connection_tanh
-from nn.modules import back_propagation_cross_entropy_batch,back_propagation_quadratic_batch
-from nn.modules import back_propagation_cross_entropy_batch_2
+from nn.modules import back_propagation_cross_entropy_batch,back_propagation_cross_entropy_batch_2
+from nn.modules import back_propagation_quadratic_batch,back_propagation_quadratic_batch_2
 
 class NeuralNetwork(object):
     def __init__(self):
@@ -21,9 +21,7 @@ class NeuralNetwork(object):
         self.bias2_initial = np.zeros([1, hp.bais2_size])
 
     def forward(self, x, w1, b1, w2, b2):
-        output1 = full_connection_sigmoid(x, w1, b1)
-        output2 = full_connection_tanh(output1, w2, b2)
-        return output1, output2
+        return full_connection_tanh(x, w1, b1), full_connection_sigmoid(output1, w2, b2)
 
     def backward(self, x, y, output1, output2, w1, b1, w2, b2, batch_size, lr=hp.lr):
         return back_propagation_cross_entropy_batch_2(w1, b1, w2, b2, error_sample(y, output2), x, output2, output1, lr,
