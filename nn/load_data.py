@@ -47,12 +47,6 @@ if __name__ == "__main__":
     print(test_data.shape, test_label.shape)
     #
     
-    #
-#    line0 = lines[0]
-#    vector0 = sentence2vector(line0)
-#    print(len(vector0),vector0[:30])
-#    train_data[0][:30]    
-#    train_label[0]
 
 
 
