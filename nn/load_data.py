@@ -45,7 +45,7 @@ if __name__ == "__main__":
     #
     test_data, test_label = load_test_data()
     print(test_data.shape, test_label.shape)
-    #
+    
     
 
 
