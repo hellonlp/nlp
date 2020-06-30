@@ -124,11 +124,11 @@ def back_propagation_quadratic_batch_2(W1, b1, W2, b2, loss, x, output2, output1
     """
     第一个激活函数是tanh，第二个激活函数sigmoid
     Objective function：Quadratic cost 
-                  f(x) = 1/2*multiply(yp-y,yp-y)
+                  f(x) = 1/2*(yp-y)**2
     """
     # Get the gradient in different layers
-    delta2 = -loss * tanh_derivative(output2)
-    delta1 = np.dot(delta2,W2.T) * sigmoid_derivative(output1)
+    delta2 = -loss * sigmoid_derivative(output2)
+    delta1 = np.dot(delta2,W2.T) * tanh_derivative(output1)    
     # Update the weight(w2) and the biais(b2):  ΔW2 = eta*delta2*output1
     W2 = W2 - hp.lr * np.dot(output1.T , delta2) / batch_size
     b2 = b2 - hp.lr * np.average(delta2, 0)
@@ -179,11 +179,11 @@ def back_propagation_cross_entropy_batch_2(W1, b1, W2, b2, loss, x, output2, out
     """
     第一个激活函数是tanh，第二个激活函数sigmoid
     Objective function：Cross-Entropy 
-                 f(x) = -[y*ln(yp)+(1−y)ln(1−yp)]
+                 f(x) = -[yln(yp)+(1−y)ln(1−yp)]
     """
     # Get the gradient in different layers
     delta2 = -loss * tanh_derivative(output2)/sigmoid_derivative(output2)
-    delta1 = np.dot(delta2,W2.T) * sigmoid_derivative(output1)
+    delta1 = np.dot(delta2,W2.T) * tanh_derivative(output1)
     # Update the weight(w2) and the biais(b2):  ΔW2 = eta*delta2*output1
     W2 = W2 - hp.lr * np.dot(output1.T , delta2) / batch_size
     b2 = b2 - hp.lr * np.average(delta2, 0)
@@ -191,7 +191,6 @@ def back_propagation_cross_entropy_batch_2(W1, b1, W2, b2, loss, x, output2, out
     W1 = W1 - hp.lr * np.dot(x.T , delta1) / batch_size
     b1 = b1 - hp.lr * np.average(delta1, 0)     
     return W1, b1, W2, b2
-
 
 if __name__ == '__main__':
     ##
